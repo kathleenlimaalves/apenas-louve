@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apenas Louve - Cifras Musicais Autorais</title>
+    <title>Apenas Louve - Músicas Autorais</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Adicionando a fonte cursiva delicada -->
+    <!-- Fonte cursiva delicada -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap">
     <style>
         :root {
@@ -37,10 +37,9 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        /* Logo com fonte cursiva delicada */
         .logo {
             font-family: 'Dancing Script', cursive;
-            font-style: normal; /* remove itálico */
+            font-style: normal;
             font-weight: 700;
             font-size: 2.5rem;
             color: var(--color-brown);
@@ -176,8 +175,17 @@
 
         .cifra-title {
             font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
             color: var(--color-dark);
+        }
+
+        .cifra-subtitle {
+            font-family: 'Dancing Script', cursive;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 1.2rem;
+            color: var(--color-terracotta);
+            margin-bottom: 0.5rem;
         }
 
         .cifra-actions {
@@ -277,22 +285,20 @@
 <body>
     <header>
         <div class="logo">Apenas Louve</div>
-        <div class="tagline">Alcance o céu adorando ao único Deus</div>
+        <div class="tagline">Alcance o céu através do louvor</div>
     </header>
 
     <nav>
         <ul>
             <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#cifras">Cifras</a></li>
+            <li><a href="#musicas">Músicas</a></li>
             <li><a href="#contato">Contato</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <section id="sobre" class="about">
-            <!-- Imagem corrigida -->
             <img src="imagens/apenaslouve.png" alt="Apenas Louve" />
-
             <h2 class="section-title">Sobre o "Apenas Louve"</h2>
             <p>"Apenas Louve" nasceu com o propósito de lembrar que adorar a Deus não depende de cenário, instrumentos ou grandes produções — depende de um coração sincero. Cada canção aqui compartilhada foi escrita em momentos de entrega, fé e intimidade com o Senhor.</p>
             <p>O desejo é simples: inspirar vidas a adorarem a Deus como estão, onde estão, com o que têm. Porque, acima de tudo, o louvor é sobre Ele. Então, apenas louve.</p>
@@ -304,16 +310,22 @@
             </div>
         </section>
 
-        <section id="Cifras e Letras">
-            <h2 class="section-title">Cifras e Letras </h2>
+        <section id="musicas">
+            <h2 class="section-title">Músicas</h2>
 
-            <div class="cifras-grid">
+            <!-- Botão de ordenar -->
+            <div class="sort-container" style="text-align:center; margin-bottom:1.5rem;">
+                <button id="sort-btn" class="btn btn-primary">Ordenar A-Z</button>
+            </div>
+
+            <div class="cifras-grid" id="cifras-grid">
                 <div class="cifra-card">
                     <div class="cifra-image">
                         <i class="fas fa-music" style="font-size: 3rem;"></i>
                     </div>
                     <div class="cifra-info">
                         <h3 class="cifra-title">Teu Nome</h3>
+                        <p class="cifra-subtitle">Kathleen Lima</p>
                         <p>Uma celebração do poder, da suficiência e da majestade de Deus.</p>
                         <div class="cifra-actions">
                             <a class="btn btn-secondary" href="pdfs/Teu_Nome_Letra.pdf" download><i class="fas fa-file-alt"></i> Download Letra</a>
@@ -328,6 +340,7 @@
                     </div>
                     <div class="cifra-info">
                         <h3 class="cifra-title">Tu és Deus do Impossível</h3>
+                        <p class="cifra-subtitle">Kathleen Lima</p>
                         <p>Uma canção de adoração que exalta a soberania e poder de Deus.</p>
                         <div class="cifra-actions">
                             <a class="btn btn-secondary" href="pdfs/Tu_Es_Deus_do_Impossivel_Letra.pdf" download><i class="fas fa-file-alt"></i> Download Letra</a>
@@ -349,7 +362,22 @@
             <p class="copyright">© 2025 Apenas Louve - Kathleen Lima. Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <!-- Script para ordenar os cards -->
+    <script>
+    document.getElementById('sort-btn').addEventListener('click', () => {
+        const grid = document.getElementById('cifras-grid');
+        const cards = Array.from(grid.getElementsByClassName('cifra-card'));
+
+        cards.sort((a, b) => {
+            const titleA = a.querySelector('.cifra-title').innerText.toUpperCase();
+            const titleB = b.querySelector('.cifra-title').innerText.toUpperCase();
+            return titleA.localeCompare(titleB);
+        });
+
+        grid.innerHTML = '';
+        cards.forEach(card => grid.appendChild(card));
+    });
+    </script>
 </body>
 </html>
-
-
