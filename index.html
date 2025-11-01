@@ -124,14 +124,14 @@
             text-align: center;
         }
         
-        .cifras-grid, .letras-grid {
+        .cifras-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
         
-        .cifra-card, .letra-card {
+        .cifra-card {
             background-color: white;
             border-radius: 8px;
             overflow: hidden;
@@ -139,11 +139,11 @@
             transition: transform 0.3s;
         }
         
-        .cifra-card:hover, .letra-card:hover {
+        .cifra-card:hover {
             transform: translateY(-5px);
         }
         
-        .cifra-image, .letra-image {
+        .cifra-image {
             height: 200px;
             background-color: var(--color-taupe);
             display: flex;
@@ -153,19 +153,20 @@
             font-size: 1.2rem;
         }
         
-        .cifra-info, .letra-info {
+        .cifra-info {
             padding: 1.5rem;
         }
         
-        .cifra-title, .letra-title {
+        .cifra-title {
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
             color: var(--color-dark);
         }
         
-        .cifra-actions, .letra-actions {
+        .cifra-actions {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 0.5rem;
             margin-top: 1rem;
         }
         
@@ -178,6 +179,7 @@
             transition: background-color 0.3s;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
         }
         
@@ -197,54 +199,6 @@
         
         .btn-secondary:hover {
             background-color: var(--color-beige);
-        }
-        
-        /* Modal para visualização de letras */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow: auto;
-            position: relative;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--color-dark);
-        }
-        
-        .letra-content {
-            white-space: pre-line;
-            line-height: 1.8;
-            font-size: 1.1rem;
-            text-align: center;
-        }
-        
-        .letra-title-modal {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: var(--color-brown);
-            font-size: 1.5rem;
         }
         
         footer {
@@ -295,17 +249,8 @@
                 margin: 0.5rem 0;
             }
             
-            .cifras-grid, .letras-grid {
+            .cifras-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .cifra-actions, .letra-actions {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            .btn {
-                justify-content: center;
             }
         }
     </style>
@@ -320,7 +265,6 @@
         <ul>
             <li><a href="#sobre">Sobre</a></li>
             <li><a href="#cifras">Cifras</a></li>
-            <li><a href="#letras">Letras</a></li>
             <li><a href="#contato">Contato</a></li>
         </ul>
     </nav>
@@ -347,33 +291,11 @@
                         <i class="fas fa-music" style="font-size: 3rem;"></i>
                     </div>
                     <div class="cifra-info">
-                        <h3 class="cifra-title">Canção de Entrega</h3>
-                        <p>Uma melodia que expressa rendição completa aos cuidados do Pai.</p>
+                        <h3 class="cifra-title">Teu Nome</h3>
+                        <p>Uma celebração do poder, da suficiência e da majestade de Deus.</p>
                         <div class="cifra-actions">
-                            <button class="btn btn-primary" onclick="visualizarPDF('pdfs/cancao-entrega.pdf')">
-                                <i class="fas fa-eye"></i> Visualizar
-                            </button>
-                            <a href="pdfs/cancao-entrega.pdf" download class="btn btn-secondary">
-                                <i class="fas fa-download"></i> Download
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="cifra-card">
-                    <div class="cifra-image">
-                        <i class="fas fa-heart" style="font-size: 3rem;"></i>
-                    </div>
-                    <div class="cifra-info">
-                        <h3 class="cifra-title">Teu Amor Me Basta</h3>
-                        <p>Declaração de que o amor de Deus é suficiente em qualquer situação.</p>
-                        <div class="cifra-actions">
-                            <button class="btn btn-primary" onclick="visualizarPDF('pdfs/teu-amor-basta.pdf')">
-                                <i class="fas fa-eye"></i> Visualizar
-                            </button>
-                            <a href="pdfs/teu-amor-basta.pdf" download class="btn btn-secondary">
-                                <i class="fas fa-download"></i> Download
-                            </a>
+                            <a class="btn btn-primary" href="pdfs/Teu_Nome_Cifra.pdf" download><i class="fas fa-guitar"></i> Baixar Cifra (PDF)</a>
+                            <a class="btn btn-secondary" href="pdfs/Teu_Nome_Letra.pdf" download><i class="fas fa-file-alt"></i> Baixar Letra (PDF)</a>
                         </div>
                     </div>
                 </div>
@@ -383,89 +305,16 @@
                         <i class="fas fa-hands-praying" style="font-size: 3rem;"></i>
                     </div>
                     <div class="cifra-info">
-                        <h3 class="cifra-title">Santo é o Senhor</h3>
-                        <p>Exaltação à santidade e majestade do nosso Deus.</p>
+                        <h3 class="cifra-title">Tu és Deus do Impossível</h3>
+                        <p>Uma canção de adoração que exalta a soberania e poder de Deus.</p>
                         <div class="cifra-actions">
-                            <button class="btn btn-primary" onclick="visualizarPDF('pdfs/santo-senhor.pdf')">
-                                <i class="fas fa-eye"></i> Visualizar
-                            </button>
-                            <a href="pdfs/santo-senhor.pdf" download class="btn btn-secondary">
-                                <i class="fas fa-download"></i> Download
-                            </a>
+                            <a class="btn btn-primary" href="pdfs/Tu_Es_Deus_do_Impossivel_Cifra.pdf" download><i class="fas fa-guitar"></i> Baixar Cifra (PDF)</a>
+                            <a class="btn btn-secondary" href="pdfs/Tu_Es_Deus_do_Impossivel_Letra.pdf" download><i class="fas fa-file-alt"></i> Baixar Letra (PDF)</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <section id="letras">
-            <h2 class="section-title">Letras das Músicas</h2>
-            
-            <div class="letras-grid">
-                <div class="letra-card">
-                    <div class="letra-image">
-                        <i class="fas fa-file-alt" style="font-size: 3rem;"></i>
-                    </div>
-                    <div class="letra-info">
-                        <h3 class="letra-title">Canção de Entrega</h3>
-                        <p>Letra completa da música de rendição ao Senhor.</p>
-                        <div class="letra-actions">
-                            <button class="btn btn-primary" onclick="visualizarLetra('Canção de Entrega', letraCancaoEntrega)">
-                                <i class="fas fa-eye"></i> Visualizar
-                            </button>
-                            <button class="btn btn-secondary" onclick="baixarLetra('Canção de Entrega', letraCancaoEntrega)">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="letra-card">
-                    <div class="letra-image">
-                        <i class="fas fa-file-alt" style="font-size: 3rem;"></i>
-                    </div>
-                    <div class="letra-info">
-                        <h3 class="letra-title">Teu Amor Me Basta</h3>
-                        <p>Letra completa da declaração de amor a Deus.</p>
-                        <div class="letra-actions">
-                            <button class="btn btn-primary" onclick="visualizarLetra('Teu Amor Me Basta', letraTeuAmorBasta)">
-                                <i class="fas fa-eye"></i> Visualizar
-                            </button>
-                            <button class="btn btn-secondary" onclick="baixarLetra('Teu Amor Me Basta', letraTeuAmorBasta)">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="letra-card">
-                    <div class="letra-image">
-                        <i class="fas fa-file-alt" style="font-size: 3rem;"></i>
-                    </div>
-                    <div class="letra-info">
-                        <h3 class="letra-title">Santo é o Senhor</h3>
-                        <p>Letra completa da exaltação à santidade de Deus.</p>
-                        <div class="letra-actions">
-                            <button class="btn btn-primary" onclick="visualizarLetra('Santo é o Senhor', letraSantoSenhor)">
-                                <i class="fas fa-eye"></i> Visualizar
-                            </button>
-                            <button class="btn btn-secondary" onclick="baixarLetra('Santo é o Senhor', letraSantoSenhor)">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    
-    <!-- Modal para visualização de letras -->
-    <div id="letraModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="fecharModal()">&times;</span>
-            <h3 id="letraTitle" class="letra-title-modal">Letra da Música</h3>
-            <div id="letraContent" class="letra-content"></div>
-        </div>
     </div>
     
     <footer id="contato">
@@ -475,125 +324,8 @@
                 <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
             </div>
-            <p class="copyright">© 2023 Apenas Louve - Kathleen Lima. Todos os direitos reservados.</p>
+            <p class="copyright">© 2025 Apenas Louve - Kathleen Lima. Todos os direitos reservados.</p>
         </div>
     </footer>
-
-    <script>
-        // Letras das músicas
-        const letraCancaoEntrega = `Canção de Entrega
-
-[Estrofe 1]
-Em Teus braços me entrego, Senhor
-Rendo minha vida ao Teu amor
-Cada sonho, cada plano em Tuas mãos
-Confio em Ti, meu bom Pastor
-
-[Refrão]
-Eu me entrego a Ti, Jesus
-Minha vida é Tua, minha força és Tu
-Em Teus braços encontro paz
-E na Tua graça vou caminhar
-
-[Estrofe 2]
-Tudo que sou pertence a Ti
-Minha vontade se perde em Ti
-Guia meus passos, ilumina meu ser
-Para sempre em Ti vou viver
-
-[Ponte]
-Não há lugar mais seguro
-Do que nos braços do Pai
-Onde encontro descanso
-E renovo a minha fé`;
-
-        const letraTeuAmorBasta = `Teu Amor Me Basta
-
-[Estrofe 1]
-Quando a tempestade vem
-E as ondas tentam me afogar
-Lembro que Tu estás comigo
-E posso em Ti confiar
-
-[Refrão]
-Teu amor me basta, Jesus
-Tua graça me sustenta
-Em qualquer situação
-Tua presença me acalenta
-
-[Estrofe 2]
-Nos vales mais profundos
-E nas montanhas também
-Tua fidelidade me acompanha
-E me guarda sempre além
-
-[Ponte]
-Nada pode me separar
-Do Teu amor eterno
-Nem a morte, nem a vida
-Nem o presente ou o inferno`;
-
-        const letraSantoSenhor = `Santo é o Senhor
-
-[Estrofe 1]
-Santo, Santo, Santo é o Senhor
-Deus do universo, Criador
-Os céus proclamam Tua glória
-A terra canta Tua vitória
-
-[Refrão]
-Santo é o Senhor
-Digno de louvor
-Exaltamos Teu nome
-Para sempre, ó Senhor
-
-[Estrofe 2]
-Teu trono é estabelecido
-Em santidade e poder
-Anjos cantam sem cessar
-"Santo és Tu, ó Senhor"
-
-[Ponte]
-Nenhum outro há como Tu
-Nem comparação existe
-Só Tu és digno de honra
-Só Tu és o Rei dos reis`;
-
-        // Função para visualizar letra
-        function visualizarLetra(titulo, letra) {
-            document.getElementById('letraTitle').textContent = titulo;
-            document.getElementById('letraContent').textContent = letra;
-            document.getElementById('letraModal').style.display = 'flex';
-        }
-        
-        // Função para baixar letra
-        function baixarLetra(titulo, letra) {
-            const element = document.createElement('a');
-            const file = new Blob([letra], {type: 'text/plain'});
-            element.href = URL.createObjectURL(file);
-            element.download = titulo + '.txt';
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
-        }
-        
-        // Função para fechar o modal
-        function fecharModal() {
-            document.getElementById('letraModal').style.display = 'none';
-        }
-        
-        // Fechar modal ao clicar fora dele
-        window.onclick = function(event) {
-            const modal = document.getElementById('letraModal');
-            if (event.target === modal) {
-                fecharModal();
-            }
-        }
-        
-        // Função para visualizar PDF (para as cifras)
-        function visualizarPDF(pdfPath) {
-            window.open(pdfPath, '_blank');
-        }
-    </script>
 </body>
 </html>
