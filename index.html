@@ -44,6 +44,9 @@ header {
     color: var(--color-terracotta);
     font-style: normal;
     margin-top:0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* NAV */
@@ -137,6 +140,9 @@ nav a.active {
     color: var(--color-brown);
     margin-bottom:0.8rem;
     text-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .about-line {
@@ -163,7 +169,7 @@ nav a.active {
 .controls input { padding:0.5rem; width:200px; border-radius:4px; border:1px solid #ccc; }
 
 .cifras-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
-.cifra-card { background:white; border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,0.08); transition: transform 0.3s; display:block; }
+.cifra-card { background:white; border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,0.08); transition: transform 0.3s; display:block; width:100%; }
 .cifra-card:hover { transform:translateY(-5px); }
 
 .cifra-image { height:200px; background-color: var(--color-taupe); display:flex; align-items:center; justify-content:center; color: var(--color-brown); font-size:1.2rem; }
@@ -241,7 +247,7 @@ footer { background-color: var(--color-dark); color: var(--color-beige); padding
         padding: 1.5rem 1rem;
     }
     .logo { font-size: 2.5rem; }
-    .tagline { font-size: 1.2rem; }
+    .tagline { font-size: 1.2rem; white-space: nowrap; }
 
     nav ul {
         flex-direction: column;
@@ -257,7 +263,7 @@ footer { background-color: var(--color-dark); color: var(--color-beige); padding
     .controls button { width: 100%; }
 
     .cifras-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 1rem;
         padding: 0 1rem;
     }
@@ -267,7 +273,7 @@ footer { background-color: var(--color-dark); color: var(--color-beige); padding
     .list .cifra-actions .btn { width: 100%; }
 
     .about img { max-width: 150px; margin: 1rem auto; }
-    .about h2 { font-size: 2rem; }
+    .about h2 { font-size: 2rem; white-space: nowrap; }
     .about p { font-size: 1rem; }
 }
 </style>
@@ -403,7 +409,7 @@ document.getElementById('list-btn').addEventListener('click',()=>{
 
 document.getElementById('grid-btn').addEventListener('click',()=>{
     cifrasGrid.style.display='grid';
-    cifrasGrid.style.gridTemplateColumns='repeat(3,1fr)';
+    cifrasGrid.style.gridTemplateColumns='repeat(auto-fit, minmax(250px, 1fr))';
     cifrasGrid.classList.remove('list');
     Array.from(cifrasGrid.getElementsByClassName('cifra-card')).forEach(card=>{
         card.style.display='block';
