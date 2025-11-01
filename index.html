@@ -158,17 +158,6 @@ nav a.active {
     color: var(--color-dark);
 }
 
-/* BIO */
-.bio {
-    background:white;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    padding:2rem 2.5rem;
-    border-radius:16px;
-    margin-top:2rem;
-    font-style: italic;
-    text-align:center;
-}
-
 /* MÚSICAS */
 .controls { text-align:center; margin-bottom:1.5rem; display:flex; flex-wrap:wrap; justify-content:center; gap:0.5rem; }
 .controls input { padding:0.5rem; width:200px; border-radius:4px; border:1px solid #ccc; }
@@ -246,11 +235,40 @@ footer { background-color: var(--color-dark); color: var(--color-beige); padding
 .pagination button { margin:0 0.2rem; padding:0.4rem 0.8rem; border:none; border-radius:4px; cursor:pointer; }
 .pagination button.active { background-color: var(--color-terracotta); color:white; }
 
+/* RESPONSIVO */
 @media(max-width:768px){
-    .cifras-grid { grid-template-columns:1fr; }
-    .list .cifra-card { flex-direction:column; align-items:flex-start; }
-    .list .cifra-actions { flex-direction:column; width:100%; }
-    .list .cifra-actions .btn { width:100%; }
+    header {
+        padding: 1.5rem 1rem;
+    }
+    .logo { font-size: 2.5rem; }
+    .tagline { font-size: 1.2rem; }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    nav a { padding: 0.5rem 1rem; font-size: 0.95rem; }
+
+    .controls {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .controls input { width: 100%; max-width: 100%; }
+    .controls button { width: 100%; }
+
+    .cifras-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    .list .cifra-card { flex-direction: column; align-items: flex-start; }
+    .list .cifra-actions { flex-direction: column; width: 100%; }
+    .list .cifra-actions .btn { width: 100%; }
+
+    .about img { max-width: 150px; margin: 1rem auto; }
+    .about h2 { font-size: 2rem; }
+    .about p { font-size: 1rem; }
 }
 </style>
 </head>
