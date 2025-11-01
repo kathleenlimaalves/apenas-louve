@@ -20,44 +20,31 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
 body{background-color:var(--color-sand);color:var(--color-dark);line-height:1.6;}
 
-/* ---------- CABEÇALHO ---------- */
+/* HEADER - MESMO FUNDO DA SEÇÃO SOBRE */
 header{
-    padding:2rem 1rem;
-    text-align:center;
-    background:white;
-    box-shadow:0 10px 20px rgba(0,0,0,.12);
-    border-radius:12px;
-    max-width:1000px;
-    margin:1rem auto;
+    padding:2rem 1rem;text-align:center;
+    background:linear-gradient(145deg,#fff8f0,#f5f1e8);
+    box-shadow:0 10px 20px rgba(0,0,0,.12);border-radius:12px;
+    max-width:1000px;margin:1rem auto;
 }
 .logo{
-    font-family:'Dancing Script',cursive;
-    font-weight:700;
-    font-size:4.2rem;               /* maior que a tagline */
-    color:var(--color-brown);
-    text-shadow:2px 2px 5px rgba(0,0,0,.1);
-    white-space:nowrap;
-    line-height:1;
+    font-family:'Dancing Script',cursive;font-weight:700;
+    font-size:4.2rem;color:var(--color-brown);
+    text-shadow:2px 2px 5px rgba(0,0,0,.1);white-space:nowrap;line-height:1;
 }
 .tagline{
-    font-size:1.45rem;              /* menor que o logo */
-    color:var(--color-terracotta);
-    margin-top:.4rem;
-    white-space:nowrap;
+    font-size:1.45rem;
+    color: var(--color-dark); /* MESMA COR DO TEXTO DO "SOBRE" */
+    margin-top:.4rem;white-space:nowrap;
 }
 
-/* ---------- NAV ---------- */
+/* NAV */
 nav{
-    background-color:var(--color-beige);
-    padding:1rem 0;
-    box-shadow:0 6px 15px rgba(0,0,0,.1);
-    border-radius:12px;
-    margin:1rem auto 2rem;
-    max-width:800px;
+    background-color:var(--color-beige);padding:1rem 0;
+    box-shadow:0 6px 15px rgba(0,0,0,.1);border-radius:12px;
+    margin:1rem auto 2rem;max-width:800px;
 }
-nav ul{
-    display:flex;justify-content:center;list-style:none;gap:1rem;flex-wrap:nowrap;
-}
+nav ul{display:flex;justify-content:center;list-style:none;gap:1rem;flex-wrap:nowrap;}
 nav a{
     display:inline-block;padding:.6rem 1.5rem;background-color:var(--color-taupe);
     color:var(--color-dark);text-decoration:none;font-weight:600;
@@ -73,10 +60,10 @@ nav a.active{
     color:#fff;
 }
 
-/* ---------- CONTAINER ---------- */
+/* CONTAINER */
 .container{max-width:1200px;margin:0 auto;padding:2rem 1rem;}
 
-/* ---------- SOBRE ---------- */
+/* SOBRE */
 .about{
     background:linear-gradient(145deg,#fff8f0,#f5f1e8);
     padding:3rem 2rem;border-radius:20px;margin-bottom:3rem;
@@ -99,9 +86,10 @@ nav a.active{
 .about p{
     margin-bottom:1rem;text-align:justify;max-width:900px;
     margin-left:auto;margin-right:auto;font-size:1.1rem;line-height:1.8;
+    color: var(--color-dark); /* Texto da descrição */
 }
 
-/* ---------- MÚSICAS HEADER ---------- */
+/* MÚSICAS HEADER */
 .musicas-header{
     display:flex;flex-direction:column;align-items:center;gap:1rem;
     margin-bottom:1.5rem;
@@ -117,7 +105,7 @@ nav a.active{
 }
 #search-input:focus{border-color:var(--color-terracotta);}
 
-/* ---------- LISTA DE MÚSICAS ---------- */
+/* LISTA DE MÚSICAS */
 .cifras-grid{display:flex;flex-direction:column;gap:1rem;}
 .cifra-card{
     display:flex;flex-direction:row;align-items:center;
@@ -149,17 +137,26 @@ nav a.active{
 .btn-secondary{background-color:var(--color-taupe);color:var(--color-dark);}
 .btn-secondary:hover{background-color:var(--color-beige);}
 
-/* ---------- PAGINAÇÃO ---------- */
-.pagination{text-align:center;margin-top:1.5rem;display:block;}
+/* PAGINAÇÃO */
+.pagination{
+    text-align:center;margin-top:2rem;display:block;
+}
 .pagination button{
-    margin:0 .2rem;padding:.4rem .8rem;border:none;
-    border-radius:4px;cursor:pointer;
+    margin:0 .3rem;padding:.5rem .9rem;border:none;
+    border-radius:6px;cursor:pointer;font-weight:600;
+    background-color:var(--color-taupe);color:var(--color-dark);
+    transition:all .3s;
+}
+.pagination button:hover{
+    background-color:var(--color-terracotta);color:white;
+    transform:translateY(-1px);
 }
 .pagination button.active{
-    background-color:var(--color-terracotta);color:white;
+    background-color:var(--color-brown);color:white;
+    box-shadow:0 3px 8px rgba(0,0,0,.15);
 }
 
-/* ---------- FOOTER ---------- */
+/* FOOTER */
 footer{
     background-color:var(--color-dark);color:var(--color-beige);
     padding:3rem 1rem;margin-top:3rem;
@@ -178,7 +175,7 @@ footer{
     margin-top:1rem;text-align:center;font-size:.9rem;color:var(--color-taupe);
 }
 
-/* ---------- RESPONSIVO ---------- */
+/* RESPONSIVO */
 @media(max-width:768px){
     .logo{font-size:3.2rem;}
     .tagline{font-size:1.2rem;}
@@ -192,6 +189,7 @@ footer{
 }
 @media(max-width:480px){
     .about h2{font-size:2rem;white-space:nowrap;}
+    .pagination button{margin:0 .2rem;padding:.4rem .7rem;font-size:.9rem;}
 }
 </style>
 </head>
@@ -228,7 +226,7 @@ footer{
         <div class="controls">
             <input type="text" id="search-input" placeholder="Pesquisar música..." />
             <button id="sort-btn" class="btn btn-secondary">
-                <i class="fas fa-sort-alpha-down"></i> A-Z
+                A-Z
             </button>
         </div>
     </div>
@@ -243,8 +241,8 @@ footer{
                     <p class="cifra-subtitle">Kathleen Lima</p>
                 </div>
                 <div class="cifra-actions">
-                    <a class="btn btn-secondary" href="pdfs/Teu_Nome_Letra.pdf" download><i class="fas fa-file-alt"></i> Letra</a>
-                    <a class="btn btn-primary" href="pdfs/Teu_Nome_Cifra.pdf" download><i class="fas fa-guitar"></i> Cifra</a>
+                    <a class="btn btn-secondary" href="pdfs/Teu_Nome_Letra.pdf" download>Letra</a>
+                    <a class="btn btn-primary" href="pdfs/Teu_Nome_Cifra.pdf" download>Cifra</a>
                 </div>
             </div>
         </div>
@@ -257,12 +255,11 @@ footer{
                     <p class="cifra-subtitle">Kathleen Lima</p>
                 </div>
                 <div class="cifra-actions">
-                    <a class="btn btn-secondary" href="pdfs/Tu_Es_Deus_do_Impossivel_Letra.pdf" download><i class="fas fa-file-alt"></i> Letra</a>
-                    <a class="btn btn-primary" href="pdfs/Tu_Es_Deus_do_Impossivel_Cifra.pdf" download><i class="fas fa-guitar"></i> Cifra</a>
+                    <a class="btn btn-secondary" href="pdfs/Tu_Es_Deus_do_Impossivel_Letra.pdf" download>Letra</a>
+                    <a class="btn btn-primary" href="pdfs/Tu_Es_Deus_do_Impossivel_Cifra.pdf" download>Cifra</a>
                 </div>
             </div>
         </div>
-        <!-- Adicione mais músicas aqui -->
     </div>
 
     <div class="pagination" id="pagination"></div>
@@ -291,7 +288,7 @@ const cardsPerPage = 10;
 let currentPage = 1;
 let allCards = Array.from(cifrasGrid.getElementsByClassName('cifra-card'));
 let filteredCards = allCards;
-let isSorted = true;   // começa A-Z
+let isSorted = true;
 
 function renderPage(page = 1) {
     currentPage = page;
@@ -309,7 +306,9 @@ function renderPage(page = 1) {
         btn.addEventListener('click', () => renderPage(i));
         pagination.appendChild(btn);
     }
-    pagination.style.display = totalPages <= 1 ? 'none' : 'block';
+    pagination.style.display = totalPages <= 1 ? 'none' : 'flex';
+    pagination.style.justifyContent = 'center';
+    pagination.style.gap = '0.5rem';
 }
 
 function sortCards(ascending = true) {
@@ -318,24 +317,22 @@ function sortCards(ascending = true) {
         const B = b.dataset.title.toLowerCase();
         return ascending ? A.localeCompare(B) : B.localeCompare(A);
     });
-    sortBtn.innerHTML = ascending
-        ? '<i class="fas fa-sort-alpha-down"></i> A-Z'
-        : '<i class="fas fa-sort-alpha-up"></i> Z-A';
+    sortBtn.innerHTML = ascending ? 'A-Z' : 'Z-A';
     isSorted = ascending;
     renderPage(1);
 }
 
 function filterCards() {
-    const q = searchInput.value.toLowerCase().trim();
-    filteredCards = allCards.filter(c => c.dataset.title.toLowerCase().includes(q));
+    const query = searchInput.value.toLowerCase().trim();
+    filteredCards = allCards.filter(card => 
+        card.dataset.title.toLowerCase().includes(query)
+    );
     sortCards(isSorted);
 }
 
-/* eventos */
 sortBtn.addEventListener('click', () => sortCards(!isSorted));
 searchInput.addEventListener('input', filterCards);
 
-/* inicialização */
 allCards.sort((a, b) => a.dataset.title.localeCompare(b.dataset.title));
 filteredCards = allCards;
 renderPage(1);
@@ -343,4 +340,3 @@ renderPage(1);
 
 </body>
 </html>
-
