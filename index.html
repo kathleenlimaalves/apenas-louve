@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apenas Louve - Cifras Musicais Autorais</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-sand: #f5f1e8;
+            --color-beige: #e8dfca;
+            --color-taupe: #d8c3a5;
+            --color-terracotta: #b9936c;
+            --color-brown: #8b6b4c;
+            --color-dark: #5d4037;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--color-sand);
+            color: var(--color-dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--color-beige);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-brown);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-style: italic;
+            color: var(--color-terracotta);
+            font-size: 1.1rem;
+        }
+        
+        nav {
+            background-color: var(--color-taupe);
+            padding: 1rem;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            color: var(--color-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--color-brown);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--color-brown);
+            font-size: 1.8rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--color-terracotta);
+            margin: 0.5rem auto;
+        }
+        
+        .about {
+            background-color: var(--color-beige);
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .about p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .bio {
+            background-color: var(--color-taupe);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .cifras-grid, .letras-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .cifra-card, .letra-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .cifra-card:hover, .letra-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .cifra-image, .letra-image {
+            height: 200px;
+            background-color: var(--color-taupe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-brown);
+            font-size: 1.2rem;
+        }
+        
+        .cifra-info, .letra-info {
+            padding: 1.5rem;
+        }
+        
+        .cifra-title, .letra-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-dark);
+        }
+        
+        .cifra-actions, .letra-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--color-terracotta);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--color-brown);
+        }
+        
+        .btn-secondary {
+            background-color: var(--color-taupe);
+            color: var(--color-dark);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--color-beige);
+        }
+        
+        /* Modal para visualização de letras */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+        
+        .letra-content {
+            white-space: pre-line;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        .letra-title-modal {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--color-brown);
+            font-size: 1.5rem;
+        }
+        
+        footer {
+            background-color: var(--color-dark);
+            color: var(--color-beige);
+            padding: 3rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: var(--color-beige);
+            font-size: 1.8rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--color-taupe);
+        }
+        
+        .copyright {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-taupe);
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .cifras-grid, .letras-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cifra-actions, .letra-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Apenas Louve</div>
+        <div class="tagline">Adorar a Deus com um coração sincero</div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#cifras">Cifras</a></li>
+            <li><a href="#letras">Letras</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="sobre" class="about">
+            <h2 class="section-title">Sobre o "Apenas Louve"</h2>
+            <p>"Apenas Louve" nasceu com o propósito de lembrar que adorar a Deus não depende de cenário, instrumentos ou grandes produções — depende de um coração sincero. Cada canção aqui compartilhada foi escrita em momentos de entrega, fé e intimidade com o Senhor.</p>
+            <p>O desejo é simples: inspirar vidas a adorarem a Deus como estão, onde estão, com o que têm. Porque, acima de tudo, o louvor é sobre Ele. Então, apenas louve.</p>
+            
+            <div class="bio">
+                <p>Adorar é mais que cantar — é viver para Deus.</p>
+                <p>O projeto "Apenas Louve" nasceu para inspirar corações a adorarem de forma simples e verdadeira, em todo tempo e lugar.</p>
+                <p>— Kathleen Lima</p>
+            </div>
+        </section>
+        
+        <section id="cifras">
+            <h2 class="section-title">Cifras Musicais</h2>
+            
+            <div class="cifras-grid">
+                <div class="cifra-card">
+                    <div class="cifra-image">
+                        <i class="fas fa-music" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="cifra-info">
+                        <h3 class="cifra-title">Canção de Entrega</h3>
+                        <p>Uma melodia que expressa rendição completa aos cuidados do Pai.</p>
+                        <div class="cifra-actions">
+                            <button class="btn btn-primary" onclick="visualizarPDF('pdfs/cancao-entrega.pdf')">
+                                <i class="fas fa-eye"></i> Visualizar
+                            </button>
+                            <a href="pdfs/cancao-entrega.pdf" download class="btn btn-secondary">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cifra-card">
+                    <div class="cifra-image">
+                        <i class="fas fa-heart" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="cifra-info">
+                        <h3 class="cifra-title">Teu Amor Me Basta</h3>
+                        <p>Declaração de que o amor de Deus é suficiente em qualquer situação.</p>
+                        <div class="cifra-actions">
+                            <button class="btn btn-primary" onclick="visualizarPDF('pdfs/teu-amor-basta.pdf')">
+                                <i class="fas fa-eye"></i> Visualizar
+                            </button>
+                            <a href="pdfs/teu-amor-basta.pdf" download class="btn btn-secondary">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cifra-card">
+                    <div class="cifra-image">
+                        <i class="fas fa-hands-praying" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="cifra-info">
+                        <h3 class="cifra-title">Santo é o Senhor</h3>
+                        <p>Exaltação à santidade e majestade do nosso Deus.</p>
+                        <div class="cifra-actions">
+                            <button class="btn btn-primary" onclick="visualizarPDF('pdfs/santo-senhor.pdf')">
+                                <i class="fas fa-eye"></i> Visualizar
+                            </button>
+                            <a href="pdfs/santo-senhor.pdf" download class="btn btn-secondary">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="letras">
+            <h2 class="section-title">Letras das Músicas</h2>
+            
+            <div class="letras-grid">
+                <div class="letra-card">
+                    <div class="letra-image">
+                        <i class="fas fa-file-alt" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="letra-info">
+                        <h3 class="letra-title">Canção de Entrega</h3>
+                        <p>Letra completa da música de rendição ao Senhor.</p>
+                        <div class="letra-actions">
+                            <button class="btn btn-primary" onclick="visualizarLetra('Canção de Entrega', letraCancaoEntrega)">
+                                <i class="fas fa-eye"></i> Visualizar
+                            </button>
+                            <button class="btn btn-secondary" onclick="baixarLetra('Canção de Entrega', letraCancaoEntrega)">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letra-card">
+                    <div class="letra-image">
+                        <i class="fas fa-file-alt" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="letra-info">
+                        <h3 class="letra-title">Teu Amor Me Basta</h3>
+                        <p>Letra completa da declaração de amor a Deus.</p>
+                        <div class="letra-actions">
+                            <button class="btn btn-primary" onclick="visualizarLetra('Teu Amor Me Basta', letraTeuAmorBasta)">
+                                <i class="fas fa-eye"></i> Visualizar
+                            </button>
+                            <button class="btn btn-secondary" onclick="baixarLetra('Teu Amor Me Basta', letraTeuAmorBasta)">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letra-card">
+                    <div class="letra-image">
+                        <i class="fas fa-file-alt" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="letra-info">
+                        <h3 class="letra-title">Santo é o Senhor</h3>
+                        <p>Letra completa da exaltação à santidade de Deus.</p>
+                        <div class="letra-actions">
+                            <button class="btn btn-primary" onclick="visualizarLetra('Santo é o Senhor', letraSantoSenhor)">
+                                <i class="fas fa-eye"></i> Visualizar
+                            </button>
+                            <button class="btn btn-secondary" onclick="baixarLetra('Santo é o Senhor', letraSantoSenhor)">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Modal para visualização de letras -->
+    <div id="letraModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal()">&times;</span>
+            <h3 id="letraTitle" class="letra-title-modal">Letra da Música</h3>
+            <div id="letraContent" class="letra-content"></div>
+        </div>
+    </div>
+    
+    <footer id="contato">
+        <div class="footer-content">
+            <h3>Conecte-se conosco</h3>
+            <div class="social-links">
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p class="copyright">© 2023 Apenas Louve - Kathleen Lima. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Letras das músicas
+        const letraCancaoEntrega = `Canção de Entrega
+
+[Estrofe 1]
+Em Teus braços me entrego, Senhor
+Rendo minha vida ao Teu amor
+Cada sonho, cada plano em Tuas mãos
+Confio em Ti, meu bom Pastor
+
+[Refrão]
+Eu me entrego a Ti, Jesus
+Minha vida é Tua, minha força és Tu
+Em Teus braços encontro paz
+E na Tua graça vou caminhar
+
+[Estrofe 2]
+Tudo que sou pertence a Ti
+Minha vontade se perde em Ti
+Guia meus passos, ilumina meu ser
+Para sempre em Ti vou viver
+
+[Ponte]
+Não há lugar mais seguro
+Do que nos braços do Pai
+Onde encontro descanso
+E renovo a minha fé`;
+
+        const letraTeuAmorBasta = `Teu Amor Me Basta
+
+[Estrofe 1]
+Quando a tempestade vem
+E as ondas tentam me afogar
+Lembro que Tu estás comigo
+E posso em Ti confiar
+
+[Refrão]
+Teu amor me basta, Jesus
+Tua graça me sustenta
+Em qualquer situação
+Tua presença me acalenta
+
+[Estrofe 2]
+Nos vales mais profundos
+E nas montanhas também
+Tua fidelidade me acompanha
+E me guarda sempre além
+
+[Ponte]
+Nada pode me separar
+Do Teu amor eterno
+Nem a morte, nem a vida
+Nem o presente ou o inferno`;
+
+        const letraSantoSenhor = `Santo é o Senhor
+
+[Estrofe 1]
+Santo, Santo, Santo é o Senhor
+Deus do universo, Criador
+Os céus proclamam Tua glória
+A terra canta Tua vitória
+
+[Refrão]
+Santo é o Senhor
+Digno de louvor
+Exaltamos Teu nome
+Para sempre, ó Senhor
+
+[Estrofe 2]
+Teu trono é estabelecido
+Em santidade e poder
+Anjos cantam sem cessar
+"Santo és Tu, ó Senhor"
+
+[Ponte]
+Nenhum outro há como Tu
+Nem comparação existe
+Só Tu és digno de honra
+Só Tu és o Rei dos reis`;
+
+        // Função para visualizar letra
+        function visualizarLetra(titulo, letra) {
+            document.getElementById('letraTitle').textContent = titulo;
+            document.getElementById('letraContent').textContent = letra;
+            document.getElementById('letraModal').style.display = 'flex';
+        }
+        
+        // Função para baixar letra
+        function baixarLetra(titulo, letra) {
+            const element = document.createElement('a');
+            const file = new Blob([letra], {type: 'text/plain'});
+            element.href = URL.createObjectURL(file);
+            element.download = titulo + '.txt';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+        
+        // Função para fechar o modal
+        function fecharModal() {
+            document.getElementById('letraModal').style.display = 'none';
+        }
+        
+        // Fechar modal ao clicar fora dele
+        window.onclick = function(event) {
+            const modal = document.getElementById('letraModal');
+            if (event.target === modal) {
+                fecharModal();
+            }
+        }
+        
+        // Função para visualizar PDF (para as cifras)
+        function visualizarPDF(pdfPath) {
+            window.open(pdfPath, '_blank');
+        }
+    </script>
+</body>
+</html>
