@@ -5,320 +5,1070 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apenas Louve - Músicas Autorais</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap">
 <style>
 :root {
-    --color-sand: #f5f1e8;
-    --color-beige: #e8dfca;
-    --color-taupe: #d8c3a5;
-    --color-terracotta: #b9936c;
+    --color-sand: #f9f7f2;
+    --color-beige: #f1ebe1;
+    --color-taupe: #e3d9c8;
+    --color-terracotta: #c8a97e;
     --color-brown: #8b6b4c;
     --color-dark: #5d4037;
+    --color-gold: #d4af37;
+    --color-light-gold: #f4e4a9;
 }
 
 /* RESET */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
-body{background-color:var(--color-sand);color:var(--color-dark);line-height:1.6;}
-
-/* HEADER - MESMO FUNDO DA SEÇÃO SOBRE */
-header{
-    padding:2rem 1rem;text-align:center;
-    background:linear-gradient(145deg,#fff8f0,#f5f1e8);
-    box-shadow:0 10px 20px rgba(0,0,0,.12);border-radius:12px;
-    max-width:1000px;margin:1rem auto;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.logo{
-    font-family:'Dancing Script',cursive;font-weight:700;
-    font-size:4.2rem;color:var(--color-brown);
-    text-shadow:2px 2px 5px rgba(0,0,0,.1);white-space:nowrap;line-height:1;
-}
-.tagline{
-    font-size:1.45rem;
-    color: var(--color-dark); /* MESMA COR DO TEXTO DO "SOBRE" */
-    margin-top:.4rem;white-space:nowrap;
+body {
+    background-color: var(--color-sand);
+    color: var(--color-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
 }
 
-/* NAV */
-nav{
-    background-color:var(--color-beige);padding:1rem 0;
-    box-shadow:0 6px 15px rgba(0,0,0,.1);border-radius:12px;
-    margin:1rem auto 2rem;max-width:800px;
+/* CONTÊINER PRINCIPAL PARA ALINHAMENTO */
+.content-wrapper {
+    /* Define a largura máxima padrão para Desktop */
+    max-width: 1200px;
+    
+    /* Centraliza o bloco na tela */
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Garante que o conteúdo não ultrapasse a largura máxima */
+    width: 100%;
+    padding: 0 1rem;
 }
-nav ul{display:flex;justify-content:center;list-style:none;gap:1rem;flex-wrap:nowrap;}
-nav a{
-    display:inline-block;padding:.6rem 1.5rem;background-color:var(--color-taupe);
-    color:var(--color-dark);text-decoration:none;font-weight:600;
-    border-radius:8px;box-shadow:0 3px 6px rgba(0,0,0,.1);
-    transition:all .3s;white-space:nowrap;
+
+/* FUNDO COM NOTAS MUSICAIS SUBINDO - COR MAIS ESCURA */
+.musical-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
 }
-nav a:hover{
-    background-color:var(--color-terracotta);color:#fff;
-    transform:translateY(-2px);box-shadow:0 5px 12px rgba(0,0,0,.2);
+
+.note {
+    position: absolute;
+    bottom: -50px;
+    font-size: 24px;
+    color: var(--color-brown); /* Cor mais escura para melhor visibilidade */
+    opacity: 0.4; /* Aumentei a opacidade */
+    animation: rise linear infinite;
+    z-index: -1;
 }
-nav a.active{
-    background:linear-gradient(135deg,var(--color-terracotta),var(--color-brown));
-    color:#fff;
+
+.note:nth-child(1) { left: 5%; animation-duration: 25s; animation-delay: 0s; }
+.note:nth-child(2) { left: 15%; animation-duration: 30s; animation-delay: 2s; }
+.note:nth-child(3) { left: 25%; animation-duration: 35s; animation-delay: 5s; }
+.note:nth-child(4) { left: 35%; animation-duration: 28s; animation-delay: 8s; }
+.note:nth-child(5) { left: 45%; animation-duration: 32s; animation-delay: 12s; }
+.note:nth-child(6) { left: 55%; animation-duration: 27s; animation-delay: 15s; }
+.note:nth-child(7) { left: 65%; animation-duration: 33s; animation-delay: 18s; }
+.note:nth-child(8) { left: 75%; animation-duration: 29s; animation-delay: 22s; }
+.note:nth-child(9) { left: 85%; animation-duration: 31s; animation-delay: 25s; }
+.note:nth-child(10) { left: 95%; animation-duration: 26s; animation-delay: 28s; }
+.note:nth-child(11) { left: 10%; animation-duration: 34s; animation-delay: 3s; }
+.note:nth-child(12) { left: 20%; animation-duration: 30s; animation-delay: 7s; }
+.note:nth-child(13) { left: 30%; animation-duration: 28s; animation-delay: 10s; }
+.note:nth-child(14) { left: 40%; animation-duration: 32s; animation-delay: 13s; }
+.note:nth-child(15) { left: 50%; animation-duration: 29s; animation-delay: 16s; }
+.note:nth-child(16) { left: 60%; animation-duration: 35s; animation-delay: 19s; }
+.note:nth-child(17) { left: 70%; animation-duration: 27s; animation-delay: 21s; }
+.note:nth-child(18) { left: 80%; animation-duration: 31s; animation-delay: 24s; }
+.note:nth-child(19) { left: 90%; animation-duration: 33s; animation-delay: 27s; }
+.note:nth-child(20) { left: 100%; animation-duration: 26s; animation-delay: 30s; }
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* LINHAS DE PARTITURA NO FUNDO */
+.staff-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 0.05;
+    background-image: 
+        linear-gradient(to bottom, var(--color-dark) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-dark) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-dark) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-dark) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-dark) 1px, transparent 1px);
+    background-size: 100% 20px;
+    background-position: 0 0, 0 5px, 0 10px, 0 15px, 0 20px;
+    animation: staffMove 120s linear infinite;
+}
+
+@keyframes staffMove {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+/* OVERLAY DE BOAS-VINDAS - MELHORADO */
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.welcome-content {
+    background: linear-gradient(135deg, var(--color-beige), var(--color-sand));
+    padding: 3.5rem;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 0 50px var(--color-light-gold), 0 10px 30px rgba(0,0,0,0.3);
+    max-width: 550px;
+    width: 90%;
+    position: relative;
+    overflow: hidden;
+    animation: scaleIn 0.8s ease-out;
+    transform-origin: center;
+    border: 2px solid var(--color-light-gold);
+}
+
+.welcome-content::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--color-light-gold) 0%, transparent 70%);
+    opacity: 0.3;
+    z-index: -1;
+    animation: rotate 20s linear infinite;
+}
+
+.welcome-content::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.4), transparent);
+    z-index: -1;
+    opacity: 0.2;
+}
+
+.welcome-content h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.8rem;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.welcome-content p {
+    font-size: 1.6rem;
+    color: var(--color-dark);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 1px;
+}
+
+#close-welcome {
+    background: linear-gradient(135deg, var(--color-gold), var(--color-terracotta));
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+#close-welcome:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
+    background: linear-gradient(135deg, var(--color-terracotta), var(--color-gold));
+}
+
+/* Animações para a plaquinha de boas-vindas */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* HEADER - MELHORIAS PARA MOBILE */
+header {
+    padding: 2.5rem 1rem;
+    text-align: center;
+    background: linear-gradient(135deg, var(--color-beige), var(--color-sand));
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    margin: 2rem auto;
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-terracotta), var(--color-gold));
+}
+
+.logo {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    font-size: 4.5rem;
+    color: var(--color-brown);
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: var(--color-dark);
+    margin-top: 0.4rem;
+    white-space: nowrap;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* NAV - CENTRALIZAÇÃO DOS TEXTOS NOS BOTÕES */
+nav {
+    background: linear-gradient(135deg, var(--color-beige), var(--color-taupe));
+    padding: 1.2rem 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    margin: 0 auto 2rem auto; /* AJUSTE: Margem inferior igual ao header */
+    position: relative;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+}
+
+nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.8rem;
+    background: linear-gradient(135deg, var(--color-taupe), var(--color-beige));
+    color: var(--color-dark);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    min-height: 50px;
+    text-align: center;
+}
+
+nav a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+}
+
+nav a:hover::before {
+    left: 100%;
+}
+
+nav a:hover {
+    background: linear-gradient(135deg, var(--color-terracotta), var(--color-gold));
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+nav a.active {
+    background: linear-gradient(135deg, var(--color-gold), var(--color-terracotta));
+    color: white;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
 }
 
 /* CONTAINER */
-.container{max-width:1200px;margin:0 auto;padding:2rem 1rem;}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem 2rem 1rem; /* AJUSTE: Padding inferior igual ao header */
+}
 
 /* SOBRE */
-.about{
-    background:linear-gradient(145deg,#fff8f0,#f5f1e8);
-    padding:3rem 2rem;border-radius:20px;margin-bottom:3rem;
-    box-shadow:0 15px 30px rgba(0,0,0,.1);text-align:center;
+.about {
+    background: linear-gradient(135deg, var(--color-beige), var(--color-sand));
+    padding: 3.5rem 2.5rem;
+    border-radius: 20px;
+    margin-bottom: 3rem;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
-.about img{
-    max-width:200px;width:100%;height:auto;border-radius:50%;
-    margin:1.5rem auto;display:block;border:3px solid var(--color-terracotta);
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+.about::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-terracotta), var(--color-gold));
 }
-.about h2{
-    font-family:'Dancing Script',cursive;font-weight:700;
-    font-size:2.5rem;color:var(--color-brown);margin-bottom:.8rem;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+
+.about img {
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin: 1.5rem auto;
+    display: block;
+    border: 3px solid var(--color-gold);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.5s;
 }
-.about-line{
-    width:100px;height:4px;background-color:var(--color-terracotta);
-    margin:15px auto 20px;border-radius:2px;
+
+.about img:hover {
+    transform: scale(1.05);
 }
-.about p{
-    margin-bottom:1rem;text-align:justify;max-width:900px;
-    margin-left:auto;margin-right:auto;font-size:1.1rem;line-height:1.8;
-    color: var(--color-dark); /* Texto da descrição */
+
+/* TÍTULO DA SEÇÃO SOBRE - NOVO FORMATO */
+.about-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.about-main-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 2.2rem;
+    color: var(--color-brown);
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+}
+
+.about-subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: var(--color-brown);
+    white-space: nowrap;
+}
+
+.about-line {
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-terracotta));
+    margin: 15px auto 25px;
+    border-radius: 2px;
+}
+
+.about p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--color-dark);
 }
 
 /* MÚSICAS HEADER */
-.musicas-header{
-    display:flex;flex-direction:column;align-items:center;gap:1rem;
-    margin-bottom:1.5rem;
+.musicas-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
 }
-.controls{
-    display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;
-    width:100%;max-width:600px;
+
+.section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.8rem;
+    color: var(--color-brown);
+    text-align: center;
+    position: relative;
+    display: inline-block;
 }
-#search-input{
-    padding:.6rem 1rem;border:2px solid var(--color-taupe);
-    border-radius:8px;font-size:1rem;width:100%;max-width:300px;
-    outline:none;transition:border-color .3s;
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-terracotta));
+    border-radius: 2px;
 }
-#search-input:focus{border-color:var(--color-terracotta);}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+#search-input {
+    padding: 0.8rem 1.2rem;
+    border: 2px solid var(--color-taupe);
+    border-radius: 50px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+    outline: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+#search-input:focus {
+    border-color: var(--color-gold);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
 
 /* LISTA DE MÚSICAS */
-.cifras-grid{display:flex;flex-direction:column;gap:1rem;}
-.cifra-card{
-    display:flex;flex-direction:row;align-items:center;
-    background:white;border-radius:12px;overflow:hidden;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);padding:.5rem 1rem;
+.cifras-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
-.cifra-image{
-    height:50px;width:50px;background-color:var(--color-taupe);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--color-brown);font-size:1.2rem;flex-shrink:0;
-    border-radius:6px;
+
+.cifra-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    padding: 1rem 1.5rem;
+    transition: all 0.3s;
+    position: relative;
 }
-.cifra-info{
-    display:flex;align-items:center;justify-content:space-between;
-    flex:1;margin-left:1rem;
+
+.cifra-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--color-gold), var(--color-terracotta));
 }
-.text-info{display:flex;flex-direction:column;}
-.cifra-title{font-size:1.2rem;color:var(--color-dark);}
-.cifra-subtitle{font-family:'Dancing Script',cursive;font-size:1rem;color:var(--color-terracotta);}
-.cifra-actions{display:flex;gap:.5rem;}
-.btn{
-    padding:.4rem .8rem;border:none;border-radius:4px;cursor:pointer;
-    font-weight:500;transition:all .3s;display:inline-flex;
-    align-items:center;justify-content:center;gap:.3rem;
-    text-decoration:none;font-size:.9rem;
+
+.cifra-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
-.btn-primary{background-color:var(--color-terracotta);color:white;}
-.btn-primary:hover{background-color:var(--color-brown);}
-.btn-secondary{background-color:var(--color-taupe);color:var(--color-dark);}
-.btn-secondary:hover{background-color:var(--color-beige);}
+
+.cifra-image {
+    height: 60px;
+    width: 60px;
+    background: linear-gradient(135deg, var(--color-gold), var(--color-terracotta));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+}
+
+.cifra-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    margin-left: 1.5rem;
+}
+
+.text-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.cifra-title {
+    font-size: 1.3rem;
+    color: var(--color-dark);
+    font-weight: 600;
+}
+
+.cifra-subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: var(--color-terracotta);
+}
+
+.cifra-actions {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-gold), var(--color-terracotta));
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--color-taupe), var(--color-beige));
+    color: var(--color-dark);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, var(--color-beige), var(--color-taupe));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
 
 /* PAGINAÇÃO */
-.pagination{
-    text-align:center;margin-top:2rem;display:block;
+.pagination {
+    text-align: center;
+    margin-top: 2.5rem;
+    display: block;
 }
-.pagination button{
-    margin:0 .3rem;padding:.5rem .9rem;border:none;
-    border-radius:6px;cursor:pointer;font-weight:600;
-    background-color:var(--color-taupe);color:var(--color-dark);
-    transition:all .3s;
+
+.pagination button {
+    margin: 0 0.3rem;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--color-taupe), var(--color-beige));
+    color: var(--color-dark);
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-.pagination button:hover{
-    background-color:var(--color-terracotta);color:white;
-    transform:translateY(-1px);
+
+.pagination button:hover {
+    background: linear-gradient(135deg, var(--color-gold), var(--color-terracotta));
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
 }
-.pagination button.active{
-    background-color:var(--color-brown);color:white;
-    box-shadow:0 3px 8px rgba(0,0,0,.15);
+
+.pagination button.active {
+    background: linear-gradient(135deg, var(--color-gold), var(--color-terracotta));
+    color: white;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
 }
 
 /* FOOTER */
-footer{
-    background-color:var(--color-dark);color:var(--color-beige);
-    padding:3rem 1rem;margin-top:3rem;
-}
-.footer-content{
-    max-width:1200px;margin:0 auto;display:flex;
-    flex-direction:column;align-items:center;
-}
-.social-links{display:flex;gap:1.5rem;margin:1.5rem 0;}
-.social-links a{
-    color:var(--color-beige);font-size:1.8rem;transition:color .3s;
-    text-decoration:none;
-}
-.social-links a:hover{color:var(--color-taupe);}
-.copyright{
-    margin-top:1rem;text-align:center;font-size:.9rem;color:var(--color-taupe);
+footer {
+    background: linear-gradient(135deg, var(--color-dark), #4a342e);
+    color: var(--color-beige);
+    padding: 3.5rem 1rem;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
 }
 
-/* RESPONSIVO */
-@media(max-width:768px){
-    .logo{font-size:3.2rem;}
-    .tagline{font-size:1.2rem;}
-    .cifra-info{flex-direction:column;align-items:flex-start;gap:.5rem;}
-    .cifra-actions{flex-wrap:wrap;}
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-terracotta), var(--color-gold));
 }
-@media(min-width:480px){
-    .musicas-header{flex-direction:row;justify-content:space-between;align-items:center;}
-    .controls{width:auto;}
-    #search-input{width:250px;}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-@media(max-width:480px){
-    .about h2{font-size:2rem;white-space:nowrap;}
-    .pagination button{margin:0 .2rem;padding:.4rem .7rem;font-size:.9rem;}
+
+.footer-content h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: var(--color-light-gold);
+}
+
+.social-links {
+    display: flex;
+    gap: 1.8rem;
+    margin: 1.5rem 0;
+}
+
+.social-links a {
+    color: var(--color-beige);
+    font-size: 2rem;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.social-links a:hover {
+    color: var(--color-gold);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+    background: rgba(255,255,255,0.15);
+}
+
+.copyright {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-taupe);
+}
+
+/* RESPONSIVO - MELHORIAS PARA MOBILE */
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 0 1rem;
+    }
+    
+    .logo {
+        font-size: 3.2rem;
+        white-space: normal;
+        line-height: 1.2;
+    }
+    
+    .tagline {
+        font-size: 1.3rem;
+        white-space: normal;
+        line-height: 1.3;
+    }
+    
+    header {
+        padding: 1.8rem 1rem;
+        margin: 1rem;
+        width: calc(100% - 2rem);
+        max-width: none;
+    }
+    
+    nav {
+        margin: 0 1rem 1rem 1rem; /* AJUSTE: Margens iguais ao header */
+        max-width: calc(100% - 2rem);
+        padding: 1rem 0;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    nav a {
+        padding: 0.7rem 1.5rem;
+        width: 90%;
+        margin: 0 auto;
+        min-height: 45px;
+    }
+    
+    .cifra-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+    
+    .cifra-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .welcome-content h2 {
+        font-size: 2.8rem;
+    }
+    
+    .welcome-content p {
+        font-size: 1.3rem;
+    }
+    
+    .about {
+        padding: 2.5rem 1.5rem;
+        margin: 0 1rem 1rem 1rem; /* AJUSTE: Margens iguais ao header */
+        width: calc(100% - 2rem);
+    }
+    
+    /* TÍTULO DA SEÇÃO SOBRE - MOBILE */
+    .about-main-title {
+        font-size: 1.8rem;
+        white-space: nowrap;
+    }
+    
+    .about-subtitle {
+        font-size: 2rem;
+        white-space: nowrap;
+    }
+    
+    .section-title {
+        font-size: 2.3rem;
+    }
+    
+    .container {
+        padding: 0 1rem 1rem 1rem; /* AJUSTE: Padding inferior igual ao header */
+    }
+}
+
+@media (min-width: 480px) {
+    .musicas-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .controls {
+        width: auto;
+    }
+    
+    #search-input {
+        width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 2.8rem;
+    }
+    
+    .tagline {
+        font-size: 1.1rem;
+    }
+    
+    /* TÍTULO DA SEÇÃO SOBRE - MOBILE PEQUENO */
+    .about-main-title {
+        font-size: 1.6rem;
+        white-space: nowrap;
+    }
+    
+    .about-subtitle {
+        font-size: 1.8rem;
+        white-space: nowrap;
+    }
+    
+    .pagination button {
+        margin: 0 0.2rem;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .welcome-content {
+        padding: 2rem;
+    }
+    
+    .welcome-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .welcome-content p {
+        font-size: 1.2rem;
+    }
+    
+    header {
+        padding: 1.5rem 0.8rem;
+        margin: 0.8rem;
+        width: calc(100% - 1.6rem);
+    }
+    
+    .about {
+        padding: 2rem 1rem;
+        margin: 0 0.8rem 0.8rem 0.8rem; /* AJUSTE: Margens iguais ao header */
+        width: calc(100% - 1.6rem);
+    }
+    
+    nav {
+        margin: 0 0.8rem 0.8rem 0.8rem; /* AJUSTE: Margens iguais ao header */
+        width: calc(100% - 1.6rem);
+    }
+    
+    .container {
+        padding: 0 0.8rem 0.8rem 0.8rem; /* AJUSTE: Padding inferior igual ao header */
+    }
 }
 </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">Apenas Louve</div>
-    <div class="tagline">Alcance o céu através do louvor</div>
-</header>
+<!-- Fundo com notas musicais subindo - COR MAIS ESCURA -->
+<div class="musical-background">
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+</div>
 
-<nav>
-    <ul>
-        <li><a href="#sobre" class="active">Sobre</a></li>
-        <li><a href="#musicas">Músicas</a></li>
-        <li><a href="#contato">Contato</a></li>
-    </ul>
-</nav>
+<!-- Linhas de partitura no fundo -->
+<div class="staff-lines"></div>
+
+<!-- Overlay de boas-vindas -->
+<div id="welcome-overlay" class="welcome-overlay">
+    <div class="welcome-content">
+        <h2>Seja bem-vindo</h2>
+        <p>Apenas Louve</p>
+        <button id="close-welcome">Entrar</button>
+    </div>
+</div>
+
+<!-- CONTÊINER PRINCIPAL PARA ALINHAMENTO -->
+<div class="content-wrapper">
+    <header>
+        <div class="logo">Apenas Louve</div>
+        <div class="tagline">Alcance o céu através do louvor</div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#sobre" class="active">Sobre</a></li>
+            <li><a href="#musicas">Músicas</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+</div>
 
 <div class="container">
-
-<section id="sobre" class="about">
-    <img src="imagens/apenaslouve.png" alt="Apenas Louve" />
-    <h2>Sobre o "Apenas Louve"</h2>
-    <div class="about-line"></div>
-    <p>"Apenas Louve" nasceu com o propósito de lembrar que adorar a Deus não depende de cenário, instrumentos ou grandes produções — depende de um coração sincero.</p>
-    <p>Adorar é mais que cantar — é viver para Deus.</p>
-    <p>O projeto "Apenas Louve" nasceu para inspirar corações a adorarem de forma simples e verdadeira, em todo tempo e lugar.</p>
-    <p>— Kathleen Lima</p>
-</section>
-
-<section id="musicas">
-    <div class="musicas-header">
-        <h2 class="section-title">Músicas</h2>
-        <div class="controls">
-            <input type="text" id="search-input" placeholder="Pesquisar música..." />
-            <button id="sort-btn" class="btn btn-secondary">
-                A-Z
-            </button>
-        </div>
+    <div class="content-wrapper">
+        <section id="sobre" class="about">
+            <img src="imagens/apenaslouve.png" alt="Apenas Louve" />
+            
+            <!-- NOVO TÍTULO DA SEÇÃO SOBRE -->
+            <div class="about-title-container">
+                <h2 class="about-main-title">Sobre</h2>
+                <div class="about-subtitle">"Apenas Louve"</div>
+            </div>
+            
+            <div class="about-line"></div>
+            <p>"Apenas Louve" nasceu com o propósito de lembrar que adorar a Deus não depende de cenário, instrumentos ou grandes produções — depende de um coração sincero.</p>
+            <p>Adorar é mais que cantar — é viver para Deus.</p>
+            <p>O projeto "Apenas Louve" nasceu para inspirar corações a adorarem de forma simples e verdadeira, em todo tempo e lugar.</p>
+            <p>— Kathleen Lima</p>
+        </section>
     </div>
 
-    <div class="cifras-grid" id="cifras-grid">
-        <!-- Exemplo de música -->
-        <div class="cifra-card" data-title="Teu Nome">
-            <div class="cifra-image"><i class="fas fa-music"></i></div>
-            <div class="cifra-info">
-                <div class="text-info">
-                    <h3 class="cifra-title">Teu Nome</h3>
-                    <p class="cifra-subtitle">Kathleen Lima</p>
-                </div>
-                <div class="cifra-actions">
-                    <a class="btn btn-secondary" href="pdfs/Teu_Nome_Letra.pdf" download>Letra</a>
-                    <a class="btn btn-primary" href="pdfs/Teu_Nome_Cifra.pdf" download>Cifra</a>
+    <div class="content-wrapper">
+        <section id="musicas">
+            <div class="musicas-header">
+                <h2 class="section-title">Músicas</h2>
+                <div class="controls">
+                    <input type="text" id="search-input" placeholder="Pesquisar música..." />
+                    <button id="sort-btn" class="btn btn-secondary">
+                        A-Z
+                    </button>
                 </div>
             </div>
-        </div>
 
-        <div class="cifra-card" data-title="Tu és Deus do Impossível">
-            <div class="cifra-image"><i class="fas fa-music"></i></div>
-            <div class="cifra-info">
-                <div class="text-info">
-                    <h3 class="cifra-title">Tu és Deus do Impossível</h3>
-                    <p class="cifra-subtitle">Kathleen Lima</p>
+            <div class="cifras-grid" id="cifras-grid">
+                <!-- Exemplo de música -->
+                <div class="cifra-card" data-title="Teu Nome">
+                    <div class="cifra-image"><i class="fas fa-music"></i></div>
+                    <div class="cifra-info">
+                        <div class="text-info">
+                            <h3 class="cifra-title">Teu Nome</h3>
+                            <p class="cifra-subtitle">Kathleen Lima</p>
+                        </div>
+                        <div class="cifra-actions">
+                            <a class="btn btn-secondary" href="pdfs/Teu_Nome_Letra.pdf" download>Letra</a>
+                            <a class="btn btn-primary" href="pdfs/Teu_Nome_Cifra.pdf" download>Cifra</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="cifra-actions">
-                    <a class="btn btn-secondary" href="pdfs/Tu_Es_Deus_do_Impossivel_Letra.pdf" download>Letra</a>
-                    <a class="btn btn-primary" href="pdfs/Tu_Es_Deus_do_Impossivel_Cifra.pdf" download>Cifra</a>
+
+                <div class="cifra-card" data-title="Tu és Deus do Impossível">
+                    <div class="cifra-image"><i class="fas fa-music"></i></div>
+                    <div class="cifra-info">
+                        <div class="text-info">
+                            <h3 class="cifra-title">Tu és Deus do Impossível</h3>
+                            <p class="cifra-subtitle">Kathleen Lima</p>
+                        </div>
+                        <div class="cifra-actions">
+                            <a class="btn btn-secondary" href="pdfs/Tu_Es_Deus_do_Impossivel_Letra.pdf" download>Letra</a>
+                            <a class="btn btn-primary" href="pdfs/Tu_Es_Deus_do_Impossivel_Cifra.pdf" download>Cifra</a>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="cifra-card" data-title="Cristo, Preciso de Ti">
+                    <div class="cifra-image"><i class="fas fa-music"></i></div>
+                    <div class="cifra-info">
+                        <div class="text-info">
+                            <h3 class="cifra-title">Cristo, Preciso de Ti</h3>
+                            <p class="cifra-subtitle">Kathleen Lima</p>
+                        </div>
+                        <div class="cifra-actions">
+                            <a class="btn btn-secondary" href="pdfs/Cristo_Preciso_de_Ti_Letra.pdf" download>Letra</a>
+                            <a class="btn btn-primary" href="pdfs/Cristo_Preciso_de_Ti_Cifra.pdf" download>Cifra</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cifra-card" data-title="Deus, Não Há Outro">
+                    <div class="cifra-image"><i class="fas fa-music"></i></div>
+                    <div class="cifra-info">
+                        <div class="text-info">
+                            <h3 class="cifra-title">Deus, Não Há Outro</h3>
+                            <p class="cifra-subtitle">Kathleen Lima</p>
+                        </div>
+                        <div class="cifra-actions">
+                            <a class="btn btn-secondary" href="pdfs/Deus_Nao_Ha_Outro_Letra.pdf" download>Letra</a>
+                            <a class="btn btn-primary" href="pdfs/Deus_Nao_Ha_Outro_Cifra.pdf" download>Cifra</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
 
-<div class="cifra-card" data-title="Cristo, Preciso de Ti">
-    <div class="cifra-image"><i class="fas fa-music"></i></div>
-    <div class="cifra-info">
-        <div class="text-info">
-            <h3 class="cifra-title">Cristo, Preciso de Ti</h3>
-            <p class="cifra-subtitle">Kathleen Lima</p>
-        </div>
-        <div class="cifra-actions">
-            <a class="btn btn-secondary" href="pdfs/Cristo_Preciso_de_Ti_Letra.pdf" download>Letra</a>
-            <a class="btn btn-primary" href="pdfs/Cristo_Preciso_de_Ti_Cifra.pdf" download>Cifra</a>
-        </div>
+            <div class="pagination" id="pagination"></div>
+        </section>
     </div>
-</div>
-
-        <div class="cifra-card" data-title="Deus, Não Há Outro">
-    <div class="cifra-image"><i class="fas fa-music"></i></div>
-    <div class="cifra-info">
-        <div class="text-info">
-            <h3 class="cifra-title">Deus, Não Há Outro</h3>
-            <p class="cifra-subtitle">Kathleen Lima</p>
-        </div>
-        <div class="cifra-actions">
-            <a class="btn btn-secondary" href="pdfs/Deus_Nao_Ha_Outro_Letra.pdf" download>Letra</a>
-            <a class="btn btn-primary" href="pdfs/Deus_Nao_Ha_Outro_Cifra.pdf" download>Cifra</a>
-        </div>
-    </div>
-</div>
-
-    </div>
-
-    <div class="pagination" id="pagination"></div>
-</section>
-
 </div>
 
 <footer id="contato">
-<div class="footer-content">
-    <h3>Conecte-se conosco</h3>
-    <div class="social-links">
-        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    <div class="content-wrapper">
+        <div class="footer-content">
+            <h3>Conecte-se conosco</h3>
+            <div class="social-links">
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p class="copyright">© 2025 Apenas Louve - Kathleen Lima. Todos os direitos reservados.</p>
+        </div>
     </div>
-    <p class="copyright">© 2025 Apenas Louve - Kathleen Lima. Todos os direitos reservados.</p>
-</div>
 </footer>
 
 <script>
+// Elementos DOM
 const cifrasGrid = document.getElementById('cifras-grid');
 const searchInput = document.getElementById('search-input');
 const sortBtn = document.getElementById('sort-btn');
 const pagination = document.getElementById('pagination');
+const welcomeOverlay = document.getElementById('welcome-overlay');
+const closeWelcome = document.getElementById('close-welcome');
 
+// Configuração da paginação
 const cardsPerPage = 10;
 let currentPage = 1;
 let allCards = Array.from(cifrasGrid.getElementsByClassName('cifra-card'));
 let filteredCards = allCards;
 let isSorted = true;
 
+// Fechar overlay de boas-vindas
+closeWelcome.addEventListener('click', () => {
+    welcomeOverlay.style.opacity = '0';
+    setTimeout(() => {
+        welcomeOverlay.style.display = 'none';
+    }, 800);
+});
+
+// Renderizar página
 function renderPage(page = 1) {
     currentPage = page;
     const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
@@ -340,6 +1090,7 @@ function renderPage(page = 1) {
     pagination.style.gap = '0.5rem';
 }
 
+// Ordenar cards
 function sortCards(ascending = true) {
     filteredCards.sort((a, b) => {
         const A = a.dataset.title.toLowerCase();
@@ -351,6 +1102,7 @@ function sortCards(ascending = true) {
     renderPage(1);
 }
 
+// Filtrar cards
 function filterCards() {
     const query = searchInput.value.toLowerCase().trim();
     filteredCards = allCards.filter(card => 
@@ -359,9 +1111,11 @@ function filterCards() {
     sortCards(isSorted);
 }
 
+// Event listeners
 sortBtn.addEventListener('click', () => sortCards(!isSorted));
 searchInput.addEventListener('input', filterCards);
 
+// Inicialização
 allCards.sort((a, b) => a.dataset.title.localeCompare(b.dataset.title));
 filteredCards = allCards;
 renderPage(1);
@@ -369,4 +1123,3 @@ renderPage(1);
 
 </body>
 </html>
-
