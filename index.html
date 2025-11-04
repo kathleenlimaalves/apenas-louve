@@ -129,6 +129,152 @@ body {
     }
 }
 
+/* CONTROLES DE ÁUDIO COMPACTOS E RETRÁTEIS */
+.audio-minimized {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--color-taupe);
+    transition: all 0.3s ease;
+    cursor: move;
+}
+
+.audio-expanded {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--color-taupe);
+    transition: all 0.3s ease;
+    cursor: move;
+    min-width: 200px;
+}
+
+.audio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.song-title {
+    font-size: 0.9rem;
+    color: var(--color-dark);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.audio-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.volume-slider {
+    width: 100%;
+    height: 5px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--color-taupe);
+    border-radius: 5px;
+    outline: none;
+    flex: 1;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--color-gold);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    background: var(--color-brown);
+    transform: scale(1.1);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--color-gold);
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+    background: var(--color-brown);
+    transform: scale(1.1);
+}
+
+.audio-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-dark);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-btn:hover {
+    background: var(--color-light-gold);
+    color: var(--color-brown);
+}
+
+.audio-toggle {
+    background: transparent;
+    border: none;
+    color: var(--color-dark);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-toggle:hover {
+    background: var(--color-light-gold);
+}
+
 /* OVERLAY DE BOAS-VINDAS - MELHORADO */
 .welcome-overlay {
     position: fixed;
@@ -802,6 +948,17 @@ footer::before {
     .container {
         padding: 0 1rem 1rem 1rem; /* AJUSTE: Padding inferior igual ao header */
     }
+    
+    /* CONTROLES DE ÁUDIO - MOBILE */
+    .audio-minimized, .audio-expanded {
+        bottom: 10px;
+        left: 10px;
+        right: auto;
+    }
+    
+    .audio-expanded {
+        min-width: 180px;
+    }
 }
 
 @media (min-width: 480px) {
@@ -878,6 +1035,26 @@ footer::before {
     .container {
         padding: 0 0.8rem 0.8rem 0.8rem; /* AJUSTE: Padding inferior igual ao header */
     }
+    
+    /* CONTROLES DE ÁUDIO - MOBILE PEQUENO */
+    .audio-minimized {
+        padding: 8px;
+    }
+    
+    .audio-expanded {
+        min-width: 160px;
+        padding: 12px;
+    }
+    
+    .song-title {
+        font-size: 0.8rem;
+    }
+    
+    .audio-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
 }
 </style>
 </head>
@@ -909,6 +1086,16 @@ footer::before {
 
 <!-- Linhas de partitura no fundo -->
 <div class="staff-lines"></div>
+
+<!-- Controles de Áudio Compactos -->
+<div id="audio-controls" class="audio-minimized">
+    <button class="audio-btn" id="play-pause">
+        <i class="fas fa-play"></i>
+    </button>
+    <button class="audio-toggle" id="audio-expand">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+</div>
 
 <!-- Overlay de boas-vindas -->
 <div id="welcome-overlay" class="welcome-overlay">
@@ -967,7 +1154,21 @@ footer::before {
             </div>
 
             <div class="cifras-grid" id="cifras-grid">
-                <!-- Exemplo de música -->
+                <!-- Música Doce Presença adicionada -->
+                <div class="cifra-card" data-title="Doce Presença">
+                    <div class="cifra-image"><i class="fas fa-music"></i></div>
+                    <div class="cifra-info">
+                        <div class="text-info">
+                            <h3 class="cifra-title">Doce Presença</h3>
+                            <p class="cifra-subtitle">Kathleen Lima</p>
+                        </div>
+                        <div class="cifra-actions">
+                            <a class="btn btn-secondary" href="pdfs/Doce_Presenca_Letra.pdf" download>Letra</a>
+                            <a class="btn btn-primary" href="pdfs/Doce_Presenca_Cifra.pdf" download>Cifra</a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="cifra-card" data-title="Teu Nome">
                     <div class="cifra-image"><i class="fas fa-music"></i></div>
                     <div class="cifra-info">
@@ -1044,6 +1245,12 @@ footer::before {
     </div>
 </footer>
 
+<!-- Elemento de Áudio ATUALIZADO para Doce Presença -->
+<audio id="background-music" loop>
+    <source src="musicas/Doce_Presenca.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+</audio>
+
 <script>
 // Elementos DOM
 const cifrasGrid = document.getElementById('cifras-grid');
@@ -1053,20 +1260,173 @@ const pagination = document.getElementById('pagination');
 const welcomeOverlay = document.getElementById('welcome-overlay');
 const closeWelcome = document.getElementById('close-welcome');
 
+// Elementos de áudio
+const backgroundMusic = document.getElementById('background-music');
+const audioControls = document.getElementById('audio-controls');
+const playPauseBtn = document.getElementById('play-pause');
+const audioExpandBtn = document.getElementById('audio-expand');
+
 // Configuração da paginação
 const cardsPerPage = 10;
 let currentPage = 1;
 let allCards = Array.from(cifrasGrid.getElementsByClassName('cifra-card'));
 let filteredCards = allCards;
 let isSorted = true;
+let isAudioExpanded = false;
+
+// Verificar se é a primeira visita
+function isFirstVisit() {
+    return !localStorage.getItem('visitedBefore');
+}
+
+// Marcar que o usuário já visitou
+function markAsVisited() {
+    localStorage.setItem('visitedBefore', 'true');
+}
+
+// Mostrar overlay apenas na primeira visita
+if (!isFirstVisit()) {
+    welcomeOverlay.style.display = 'none';
+}
 
 // Fechar overlay de boas-vindas
 closeWelcome.addEventListener('click', () => {
     welcomeOverlay.style.opacity = '0';
     setTimeout(() => {
         welcomeOverlay.style.display = 'none';
+        markAsVisited();
+        
+        // Iniciar a música após fechar o overlay
+        backgroundMusic.play().catch(e => {
+            console.log("Reprodução automática bloqueada. O usuário precisa interagir primeiro.");
+        });
     }, 800);
 });
+
+// Função para expandir/recolher controles de áudio
+function toggleAudioControls() {
+    if (isAudioExpanded) {
+        // Recolher controles
+        audioControls.className = 'audio-minimized';
+        audioControls.innerHTML = `
+            <button class="audio-btn" id="play-pause">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="audio-toggle" id="audio-expand">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        `;
+    } else {
+        // Expandir controles
+        audioControls.className = 'audio-expanded';
+        audioControls.innerHTML = `
+            <div class="audio-header">
+                <span class="song-title">Doce Presença</span>
+                <button class="audio-toggle" id="audio-collapse">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <div class="audio-controls-row">
+                <button class="audio-btn" id="play-pause">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="volume-control">
+                    <button class="audio-btn" id="volume-down">
+                        <i class="fas fa-volume-down"></i>
+                    </button>
+                    <input type="range" min="0" max="100" value="30" class="volume-slider" id="volume-slider">
+                    <button class="audio-btn" id="volume-up">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    isAudioExpanded = !isAudioExpanded;
+    setupAudioControls();
+}
+
+// Configurar controles de áudio
+function setupAudioControls() {
+    // Elementos de áudio
+    const playPauseBtn = document.getElementById('play-pause');
+    const volumeSlider = document.getElementById('volume-slider');
+    const volumeDownBtn = document.getElementById('volume-down');
+    const volumeUpBtn = document.getElementById('volume-up');
+    const audioCollapseBtn = document.getElementById('audio-collapse');
+    const audioExpandBtn = document.getElementById('audio-expand');
+    
+    // Configurar volume inicial
+    if (volumeSlider) {
+        backgroundMusic.volume = volumeSlider.value / 100;
+    }
+
+    // Play/Pause
+    if (playPauseBtn) {
+        playPauseBtn.addEventListener('click', () => {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                backgroundMusic.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+    }
+
+    // Atualizar ícone quando a música terminar
+    backgroundMusic.addEventListener('ended', () => {
+        if (playPauseBtn) {
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    });
+
+    // Controle de volume com slider
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', () => {
+            backgroundMusic.volume = volumeSlider.value / 100;
+        });
+    }
+
+    // Botões de volume
+    if (volumeDownBtn) {
+        volumeDownBtn.addEventListener('click', () => {
+            if (volumeSlider) {
+                let currentVolume = parseInt(volumeSlider.value);
+                if (currentVolume > 0) {
+                    volumeSlider.value = currentVolume - 10;
+                    backgroundMusic.volume = volumeSlider.value / 100;
+                }
+            }
+        });
+    }
+
+    if (volumeUpBtn) {
+        volumeUpBtn.addEventListener('click', () => {
+            if (volumeSlider) {
+                let currentVolume = parseInt(volumeSlider.value);
+                if (currentVolume < 100) {
+                    volumeSlider.value = currentVolume + 10;
+                    backgroundMusic.volume = volumeSlider.value / 100;
+                }
+            }
+        });
+    }
+
+    // Botão para recolher controles
+    if (audioCollapseBtn) {
+        audioCollapseBtn.addEventListener('click', toggleAudioControls);
+    }
+    
+    // Botão para expandir controles
+    if (audioExpandBtn) {
+        audioExpandBtn.addEventListener('click', toggleAudioControls);
+    }
+}
+
+// Inicializar controles de áudio
+setupAudioControls();
 
 // Renderizar página
 function renderPage(page = 1) {
